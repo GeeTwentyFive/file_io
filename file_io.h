@@ -116,10 +116,8 @@ EnumFiles
 	DIR
 	*target_dir;
 	target_dir = opendir(target_name);
-	if (target_dir == 0) {
-		perror(0);
+	if (target_dir == 0)
 		return -1;
-	}
 
 	int
 	names_size
