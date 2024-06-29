@@ -40,19 +40,23 @@ ReadFile
 		return -1;
 
 	fseek(file, 0, SEEK_END);
+
 	int
 	target_file_size
 	= ftell(file);
+
 	fseek(file, 0, SEEK_SET);
 
 	if (target_file_size > out_size) {
 
 		fclose(file);
+
 		return -2;
 
 	}
 
 	fread(out, 1, target_file_size, file);
+
 	if (out_target_size != NULL)
 		*out_target_size = target_file_size;
 
@@ -115,30 +119,39 @@ EnumFiles
 	static
 	DIR
 	*target_dir;
+
 	target_dir = opendir(target_name);
+
 	if (target_dir == 0)
 		return -1;
 
 	int
 	names_size
 	= 256*256;
+
 	char
 	(*names)[256]
 	= malloc(names_size);
 
 	int
 	count;
+
 	struct
 	dirent
 	*target_content;
+
 	target_content = readdir(target_dir); // .
+
 	target_content = readdir(target_dir); // ..
+
 	for (
+
 		count = 0;
 
 		(target_content = readdir(target_dir)) != 0;
 
 		count++
+
 	) {
 
 		if (count == names_size/256)
@@ -154,6 +167,7 @@ EnumFiles
 	closedir(target_dir);
 
 	*out_names = names;
+
 	return count;
 
 }
@@ -167,7 +181,11 @@ EnumFiles_Free
 	char
 	(*target)[256]
 
-) { free(target); }
+) {
+
+	free(target);
+
+}
 
 
 
